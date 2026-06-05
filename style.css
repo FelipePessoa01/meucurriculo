@@ -311,6 +311,8 @@ h1 {
 .stat-desc { font-size: 0.9rem; color: var(--text-dim); margin-top: 4px; }
 
 /* --- SEÇÃO PORTFÓLIO --- */
+
+/* --- SEÇÃO PORTFÓLIO --- */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -327,22 +329,80 @@ h1 {
     align-items: center;
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    text-decoration: none; /* Remove o sublinhado padrão dos links */
+    transition: all 0.4s ease;
 }
 
-.project-card:hover {
-    transform: scale(1.02);
-    border-color: var(--hover-border);
+/* Configuração da Imagem de Fundo */
+.project-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz a foto preencher o quadrado sem amassar */
+    z-index: 1;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: brightness(0.6) grayscale(20%); /* Escurece a foto para o texto aparecer */
 }
 
-.project-card span {
+/* O quadriculado fica por cima da foto */
+.grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(to right, rgba(34, 211, 238, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(34, 211, 238, 0.07) 1px, transparent 1px);
+    background-size: 25px 25px;
+    z-index: 2; 
+    pointer-events: none;
+}
+
+/* Configuração do Texto */
+.project-info {
     position: relative;
     z-index: 3;
-    color: var(--accent);
+    text-align: center;
+    padding: 10px;
+    background: rgba(3, 7, 18, 0.6); /* Cria uma faixinha escura atrás do texto */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 8px;
+    transform: translateY(10px); /* Começa um pouquinho para baixo */
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.project-info span {
+    color: var(--text-main);
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     font-size: 0.95rem;
+}
+
+/* ===================================== */
+/* EFEITOS QUANDO O MOUSE PASSA POR CIMA */
+/* ===================================== */
+.project-card:hover {
+    transform: translateY(-5px); /* O card sobe um pouquinho */
+    border-color: var(--accent);
+    box-shadow: 0 10px 20px rgba(34, 211, 238, 0.15);
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.08); /* A foto dá um zoom suave */
+    filter: brightness(0.9) grayscale(0%); /* A foto fica colorida e clara */
+}
+
+.project-card:hover .project-info {
+    transform: translateY(0); /* O texto sobe pro lugar */
+    opacity: 1;
+    background: rgba(3, 7, 18, 0.85); /* A faixa fica mais escura pra dar contraste */
+    border: 1px solid var(--accent);
+}
+
+.project-card:hover .project-info span {
+    color: var(--accent);
 }
 
 /* --- SEÇÃO FOOTER / CONTATO --- */
